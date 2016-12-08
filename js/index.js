@@ -67,23 +67,23 @@ function Dude() {
             // var url = index.url[0];
             // var url = (index.url == undefined) ? "" : index.url;
             var _url;
-            if(index.url!==undefined){
+            if (index.url !== undefined) {
                 // _url=index.url.map(function(index, elem) {
                 //     var obj="";
                 //     obj+="<p><span class='f-break'>"+index+"</span></p>";
                 //     return obj;
                 // });
-                _url="";
-                for(var keys in index.url){
-                    _url+="<p><a class='f-break'>"+index.url[keys]+"</a></p>";
+                _url = "";
+                for (var keys in index.url) {
+                    _url += "<p><a class='f-break'>" + index.url[keys] + "</a></p>";
                 }
-            }else{
-                _url="<p>暂无</p>"
+            } else {
+                _url = "<p>暂无</p>"
             }
             var pc_url = index.pc_url;
             liveObj += "<tr><td>" + liveNum + "</td>";
             liveObj += "<td>" + title + "</td>";
-            liveObj += "<td>"+_url+"</td>";
+            liveObj += "<td>" + _url + "</td>";
             liveObj += "<td><a class='f-break'>" + pc_url + "</a></td></tr>";
             liveNum++;
         };
@@ -136,28 +136,31 @@ function Dude() {
         $("#insList").find("tbody").html(obj);
     };
     this.callback_line = function(msg) {
-        var data = msg[wdog.date()];
+        var totleData = msg;
         var obj = "";
         var num = 0;
-        for (var key in data) {
-            var index = data[key];
-            var title = key;
-            num++;
-            for (var _key in index) {
+        for (var keys in totleData) {
+            var data = totleData[keys];
+            for (var key in data) {
+                var index = data[key];
+                var title = key;
+                num++;
+                for (var _key in index) {
+                    var _index = index[_key];
+                    var _name = _index.name;
+                    var _weight = _index.weight;
+                    var _url = _index.url;
+                    obj += "<tr data-key='" + _key + "' data-type='line' data-title='" + title + "' data-date='" + keys + "' '><td>" + num + "</td>";
+                    obj += "<td>" + keys + "</td>";
+                    obj += "<td>" + title + "</td>";
+                    obj += "<td>" + _name + "</td>";
+                    obj += "<td>" + _weight + "</td>";
+                    obj += "<td><span class='f-break'>" + _url + "</span></td>";
+                    obj += '<td><div class="btn-group"><a class="btn btn-sm btn-default fix">修改</><a class="btn btn-sm btn-default delete">删除</a></td></tr>';
 
-                var _index = index[_key];
-                var _name = _index.name;
-                var _weight = _index.weight;
-                var _url = _index.url;
-                obj += "<tr data-key='" + _key + "' data-type='line' data-title='" + title + "'><td>" + num + "</td>";
-                obj += "<td>" + title + "</td>";
-                obj += "<td>" + _name + "</td>";
-                obj += "<td>" + _weight + "</td>";
-                obj += "<td><span class='f-break'>" + _url + "</span></td>";
-                obj += '<td><div class="btn-group"><a class="btn btn-sm btn-default fix">修改</><a class="btn btn-sm btn-default delete">删除</a></td></tr>';
-
-            }
-        };
+                }
+            };
+        }
         $("#lineList").find("tbody").html(obj);
     }
 };
@@ -173,6 +176,13 @@ var wdog = {
         var month = oDate.getMonth() + 1; //获取系统月份，由于月份是从0开始计算，所以要加1
         var day = oDate.getDate(); // 获取系统日，
         return year + "-" + month + "-" + day
+    },
+    afterDate: function() {
+        var oDate = new Date();
+        var year = oDate.getFullYear(); //获取系统的年；
+        var month = oDate.getMonth() + 1; //获取系统月份，由于月份是从0开始计算，所以要加1
+        var day = oDate.getDate() + 1; // 获取系统日，
+        return year + "-" + month + "-" + day
     }
 };
 
@@ -181,7 +191,7 @@ wdog.ref = wilddog.sync().ref("/jrstv/");
 wdog.ref_bs = wilddog.sync().ref("/zhibodude/");
 wdog.ref_twitter = wilddog.sync().ref("/zhibodude-twitter/");
 wdog.ref_ins = wilddog.sync().ref("/zhibodude-ins/");
-wdog.ref_line = wilddog.sync().ref("/zhibodude-line/" + wdog.date());
+wdog.ref_line = wilddog.sync().ref("/zhibodude-line/");
 
 $(document).ready(function($) {
     //实例化
@@ -276,6 +286,7 @@ $(document).ready(function($) {
     // 提交line数据
     $("#line-submit").on("click", function() {
         var title = $("#line-title").val();
+        var date = ($("#line-date").val() == "date") ? wdog.date() : wdog.afterDate();
         var data = {
             name: $("#line-name").val(),
             weight: $("#line-weight").val(),
@@ -288,7 +299,7 @@ $(document).ready(function($) {
                 return;
             }
         };
-        wdog.ref_line.child("/" + title).push(data, function(err) {
+        wdog.ref_line.child("/" + date + "/" + title).push(data, function(err) {
             if (err == null) {
                 alert("提交成功");
                 myDude.invoke(myDude.url_line, myDude.callback_line)
@@ -362,7 +373,8 @@ $(document).ready(function($) {
                 })
             } else if (type == "line") {
                 var title = $(this).closest('tr').attr("data-title");
-                wdog.ref_line.child("/" + title + "/" + node).set(null, function(err) {
+                var date = $(this).closest('tr').attr("data-date");
+                wdog.ref_line.child("/" + date + "/" + title + "/" + node).set(null, function(err) {
                     if (err == null) {
                         alert("删除成功");
                         myDude.invoke(myDude.url_line, myDude.callback_line)
@@ -438,11 +450,13 @@ $(document).ready(function($) {
                     }
                 });
             } else if (type == "line") {
+                var _date = ($("#line-date").val() == "date") ? wdog.date() : wdog.afterDate();
                 var data = {
                     name: $("#line-name").val(),
                     weight: $("#line-weight").val(),
                     title: $("#line-title").val(),
                     url: $("#line-url").val(),
+                    date: _date
                 };
                 for (var key in data) {
                     var index = data[key];
@@ -452,7 +466,7 @@ $(document).ready(function($) {
                         return;
                     }
                 };
-                wdog.ref_line.child("/" + data.title + "/" + node).set(data, function(err) {
+                wdog.ref_line.child("/" + data.date + "/" + data.title + "/" + node).set(data, function(err) {
                     if (err == null) {
                         alert("修改成功");
                         myDude.invoke(myDude.url_line, myDude.callback_line)
