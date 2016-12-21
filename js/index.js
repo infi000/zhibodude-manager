@@ -2,7 +2,7 @@
  * @Author: 张驰阳
  * @Date:   2016-12-01 17:01:50
  * @Last Modified by:   张驰阳
- * @Last Modified time: 2016-12-06 11:32:07
+ * @Last Modified time: 2016-12-21 18:23:17
  */
 
 'use strict';
@@ -60,19 +60,14 @@ function Dude() {
         };
         $("#data-channel").find("tbody").html(channelsOjb);
         var liveObj = "";
+        //创建直播线路SELECT元素
+        var lineObj="";
         var liveNum = 1;
         for (var key in msg.today) {
             var index = msg.today[key];
             var title = index.title;
-            // var url = index.url[0];
-            // var url = (index.url == undefined) ? "" : index.url;
             var _url;
             if (index.url !== undefined) {
-                // _url=index.url.map(function(index, elem) {
-                //     var obj="";
-                //     obj+="<p><span class='f-break'>"+index+"</span></p>";
-                //     return obj;
-                // });
                 _url = "";
                 for (var keys in index.url) {
                     _url += "<p><a class='f-break'>" + index.url[keys] + "</a></p>";
@@ -86,7 +81,9 @@ function Dude() {
             liveObj += "<td>" + _url + "</td>";
             liveObj += "<td><a class='f-break'>" + pc_url + "</a></td></tr>";
             liveNum++;
+            lineObj+='<option value="'+title+'">'+title+'</option>'
         };
+        $("#line-title2").html(lineObj);
         $("#data-config").find("tbody").html(liveObj);
     };
     this.callback_twitter = function(msg) {
@@ -103,13 +100,13 @@ function Dude() {
             var weight = index.weight;
             // obj += "<tr><td>" + keys + "</td>";
             obj += "<tr data-Key='" + keys + "' data-type='twitter'><td>" + Num + "</td>";
-            obj += "<td>" + name + "</td>";
-            obj += "<td><img src='http://www.zhibodude.com/" + head + "' width='70'></td>";
-            obj += "<td>" + weight + "</td>";
-            obj += "<td>" + msg + "</td>";
-            obj += "<td>" + time + "</td>";
-            obj += "<td><a href='http://www.zhibodude.com/static/twitterImg/" + img + "'><img src='http://www.zhibodude.com/static/twitterImg/" + img + "' width='100' ></a></td>";
-            obj += '<td><div class="btn-group"><a class="btn btn-sm btn-default fix">修改</><a class="btn btn-sm btn-default delete">删除</a></div></tr>';
+            obj += "<td class='data-twitter-name'>" + name + "</td>";
+            obj += "<td class='data-twitter-head' data-img='"+head+"'><img src='http://www.zhibodude.com/" + head + "' width='70'></td>";
+            obj += "<td class='data-twitter-weight'>" + weight + "</td>";
+            obj += "<td class='data-twitter-msg'>" + msg + "</td>";
+            obj += "<td class='data-twitter-time'>" + time + "</td>";
+            obj += "<td class='data-twitter-img' data-img='"+img+"'><a href='http://www.zhibodude.com/static/twitterImg/" + img + "'><img src='http://www.zhibodude.com/static/twitterImg/" + img + "' width='100' ></a></td>";
+            obj += '<td><div class="btn-group"><a class="btn btn-sm btn-default choose">选中</><a class="btn btn-sm btn-default fix">修改</><a class="btn btn-sm btn-default delete">删除</a></div></tr>';
             Num++;
         };
         $("#twitterList").find("tbody").html(obj);
@@ -126,11 +123,11 @@ function Dude() {
             var weight = index.weight;
             // obj += "<tr><td>" + keys + "</td>";
             obj += "<tr data-Key='" + keys + "' data-type='ins'><td>" + Num + "</td>";
-            obj += "<td>" + name + "</td>";
-            obj += "<td>" + weight + "</td>";
-            obj += "<td>" + msg + "</td>";
-            obj += "<td><a href='http://www.zhibodude.com/static/insImg/" + img + "'><img src='http://www.zhibodude.com/static/insImg/" + img + "' width='100' ></a></td>";
-            obj += '<td><div class="btn-group"><a class="btn btn-sm btn-default fix">修改</><a class="btn btn-sm btn-default delete">删除</a></div></tr>';
+            obj += "<td class='data-ins-name'>" + name + "</td>";
+            obj += "<td class='data-ins-weight'>" + weight + "</td>";
+            obj += "<td class='data-ins-msg'>" + msg + "</td>";
+            obj += "<td class='data-ins-img' data-img='"+img+"'><a href='http://www.zhibodude.com/static/insImg/" + img + "'><img src='http://www.zhibodude.com/static/insImg/" + img + "' width='100' ></a></td>";
+            obj += '<td><div class="btn-group"><a class="btn btn-sm btn-default choose">选择</><a class="btn btn-sm btn-default fix">修改</><a class="btn btn-sm btn-default delete">删除</a></div></tr>';
             Num++;
         };
         $("#insList").find("tbody").html(obj);
@@ -148,15 +145,17 @@ function Dude() {
                 for (var _key in index) {
                     var _index = index[_key];
                     var _name = _index.name;
+                    var _type = _index.type;
                     var _weight = _index.weight;
                     var _url = _index.url;
                     obj += "<tr data-key='" + _key + "' data-type='line' data-title='" + title + "' data-date='" + keys + "' '><td>" + num + "</td>";
                     obj += "<td>" + keys + "</td>";
-                    obj += "<td>" + title + "</td>";
-                    obj += "<td>" + _name + "</td>";
-                    obj += "<td>" + _weight + "</td>";
-                    obj += "<td><span class='f-break'>" + _url + "</span></td>";
-                    obj += '<td><div class="btn-group"><a class="btn btn-sm btn-default fix">修改</><a class="btn btn-sm btn-default delete">删除</a></td></tr>';
+                    obj += "<td class='data-line-title'>" + title + "</td>";
+                    obj += "<td class='data-line-name'>" + _name + "</td>";
+                    obj += "<td class='data-line-type'>" + _type + "</td>";
+                    obj += "<td class='data-line-weight'>" + _weight + "</td>";
+                    obj += "<td><span class='f-break data-line-url'>" + _url + "</span></td>";
+                    obj += '<td><div class="btn-group"><a class="btn btn-sm btn-default choose">选中</><a class="btn btn-sm btn-default fix">修改</><a class="btn btn-sm btn-default delete">删除</a></td></tr>';
 
                 }
             };
@@ -291,6 +290,7 @@ $(document).ready(function($) {
             name: $("#line-name").val(),
             weight: $("#line-weight").val(),
             url: $("#line-url").val(),
+            type: $("#line-type").val(),
         };
         for (var key in data) {
             var index = data[key];
@@ -456,6 +456,7 @@ $(document).ready(function($) {
                     weight: $("#line-weight").val(),
                     title: $("#line-title").val(),
                     url: $("#line-url").val(),
+                    type: $("#line-type").val(),
                     date: _date
                 };
                 for (var key in data) {
@@ -476,6 +477,39 @@ $(document).ready(function($) {
         } else {
             return;
         }
+    });
+    //选中条目
+    $(document).on("click", ".choose", function() {
+        var type = $(this).closest('tr').attr("data-type");
+        var node = $(this).closest('tr').attr("data-Key");
+        var title = $(this).closest('tr').attr("data-title")
+        if (type == "line") {
+            var tr = $(this).closest('tr');
+            $("#line-title").val(title);
+            $("#line-name").val(tr.find(".data-line-name").html());
+            $("#line-type").val(tr.find(".data-line-type").html());
+            $("#line-weight").val(tr.find(".data-line-weight").html());
+            $("#line-url").val(tr.find(".data-line-url").html());
+        }else if(type=="twitter"){
+            var tr=$(this).closest('tr');
+            $("#twitter-name").val(tr.find(".data-twitter-name").html());
+            $("#twitter-head").val(tr.find(".data-twitter-head").attr("data-img"));
+            $("#twitter-weight").val(tr.find(".data-twitter-weight").html());
+            $("#twitter-time").val(tr.find(".data-twitter-time").html());
+            $("#twitter-msg").val(tr.find(".data-twitter-msg").html());
+            $("#twitter-img").val(tr.find(".data-twitter-img").attr("data-img"));
+        }else if(type=="ins"){
+             var tr=$(this).closest('tr');
+               $("#ins-name").val(tr.find(".data-ins-name").html());
+               $("#ins-weight").val(tr.find(".data-ins-weight").html());
+               $("#ins-msg").val(tr.find(".data-ins-msg").html());
+               $("#ins-img").val(tr.find(".data-ins-img").attr("data-img"));
+        }
+    });
+    //选择对阵队伍
+    $(document).on("change","#line-title2",function(){
+        var title=$(this).val();
+        $("#line-title").val(title);
     });
 
 });
