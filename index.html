@@ -323,13 +323,20 @@
                                     <option value="date">今天</option>
                                     <option value="afterDate">明天</option>
                                 </select>
+                                <select id="line-type">
+                                    <option value="source">直播源</option>
+                                    <option value="iframe">iframe</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="">title:</label>
+                                <label for="">对阵:</label>
                                 <input type="text" class="form-control" id="line-title">
+                                <select id="line-title2" >
+                                    <option value="" name="title">无</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="">name:</label>
+                                <label for="">线路名称:</label>
                                 <input type="text" class="form-control" id="line-name">
                             </div>
                             <div class="form-group">
@@ -351,9 +358,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>date</th>
-                                    <th>title</th>
-                                    <th>name</th>
+                                    <th>日期</th>
+                                    <th>对阵</th>
+                                    <th>线路名</th>
+                                    <th>资源类型</th>
                                     <th>weight</th>
                                     <th>url</th>
                                     <th>action</th>
