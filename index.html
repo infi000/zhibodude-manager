@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -393,3 +394,400 @@
 </body>
 
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>zhibodude后台</title>
+    <!-- Bootstrap core CSS -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#" id="getBs">banner&slogan</a></li>
+                    <li><a href="#" id="getData">DATAcenter</a></li>
+                    <li><a href="#" id="getTwitter">Twitter</a></li>
+                    <li><a href="#" id="getIns">Ins</a></li>
+                    <li><a href="#" id="getLine">添加线路</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="mainBox" id="bs-main">
+                    <h1 class="page-header">Banner&slogan</h1>
+                    <div class="container">
+                        <div class="form">
+                            <div class="form-group">
+                                <label for="">name:</label>
+                                <input type="text" class="form-control" id="bs-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="">weight:</label>
+                                <input type="text" class="form-control" id="bs-weight">
+                            </div>
+                            <div class="form-group">
+                                <label for="">img:</label>
+                                <input type="text" class="form-control" id="bs-img">
+                            </div>
+                            <div class="form-group">
+                                <label for="">msg:</label>
+                                <textarea class="form-control" rows="3" id="bs-msg"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="btn btn-default" id="bs-submit">提交</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="sub-header">Banner&sloban-list</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="bsList">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>name</th>
+                                    <th>weight</th>
+                                    <th>msg</th>
+                                    <th>img</th>
+                                    <th>action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--                 <tr>
+                                <td>1,001</td>
+                                <td>Lorem</td>
+                                <td>ipsum</td>
+                                <td>dolor</td>
+                                <td>sit</td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mainBox" id="data-main" style="display: none">
+                    <h1 class="page-header">DATA manager</h1>
+                    <div class="container">
+                        <div class="input-group">
+                            <div class="btn btn-default" id="update-config">更新config.json</div>
+                            <div class="btn btn-default" id="update-gamefile">更新gamefile</div>
+                        </div>
+                        <div class="form">
+                            <div class="form-group">
+                                <label for="">title:</label>
+                                <input type="text" class="form-control" id="channel-title">
+                            </div>
+                            <div class="form-group">
+                                <label for="">weight:</label>
+                                <input type="text" class="form-control" id="channel-weight">
+                            </div>
+                            <div class="form-group">
+                                <label for="">url:</label>
+                                <input type="text" class="form-control" id="channel-url">
+                            </div>
+                            <div class="form-group">
+                                <label for="">time</label>
+                                <input type="text" class="form-control" id="channel-time">
+                            </div>
+                            <div class="form-group">
+                                <label for="">msg:</label>
+                                <textarea class="form-control" rows="3" id="channel-msg"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="btn btn-default" id="channel-submit">提交</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="sub-header">频道直播信息</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="data-channel">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>title</th>
+                                    <th>url</th>
+                                    <th>pc_url</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--                 <tr>
+                                <td>1,001</td>
+                                <td>Lorem</td>
+                                <td>ipsum</td>
+                                <td>dolor</td>
+                                <td>sit</td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <h2 class="sub-header">比赛直播信息</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="data-config">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>title</th>
+                                    <th>url</th>
+                                    <th>pc_url</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--                 <tr>
+                                <td>1,001</td>
+                                <td>Lorem</td>
+                                <td>ipsum</td>
+                                <td>dolor</td>
+                                <td>sit</td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mainBox" id="twitter-main" style="display: none">
+                    <h1 class="page-header">TWIITER</h1>
+                    <div class="container">
+                        <div class="form">
+                            <div class="form-group">
+                                <label for="">name:</label>
+                                <input type="text" class="form-control" id="twitter-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="">headSrc:</label>
+                                <!-- <input type="text" class="form-control" id="twitter-head"> -->
+                                <select name="" id="twitter-head">
+                                    <option value="/static/head/russwest44.jpg">威少</option>
+                                    <option value="/static/head/StephenCurry30.jpg">库里</option>
+                                    <option value="/static/head/JHarden13.jpg">哈登</option>
+                                    <option value="/static/head/KingJames.jpg">詹姆斯</option>
+                                    <option value="/static/head/kobebryant.jpg">科比</option>
+                                    <option value="/static/head/DwyaneWade.jpg">wade</option>
+                                    <option value="/static/head/SHAQ.jpg">SHAQ</option>
+                                    <option value="/static/head/KDTrey5.jpg">杜兰特</option>
+                                    <option value="/static/head/KyrieIrving.jpg">欧文</option>
+                                    <option value="/static/head/carmeloanthony.jpg">甜瓜</option>
+                                    <option value="/static/head/CP3.jpg">cp3</option>
+                                    <option value="/static/head/woj.jpg">woj</option>
+                                    <option value="/static/head/green.jpg">格林</option>
+                                    <option value="/static/head/wall.jpg">沃尔</option>
+                                    <option value="/static/head/klay.jpg">克莱.汤普森</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">weight:</label>
+                                <input type="text" class="form-control" id="twitter-weight">
+                            </div>
+                            <div class="form-group">
+                                <label for="">img:</label>
+                                <input type="text" class="form-control" id="twitter-img">
+                            </div>
+                            <div class="form-group">
+                                <label for="">time</label>
+                                <input type="text" class="form-control" id="twitter-time">
+                            </div>
+                            <div class="form-group">
+                                <label for="">msg:</label>
+                                <textarea class="form-control" rows="3" id="twitter-msg"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="btn btn-default" id="twitter-submit">提交</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="sub-header">twitter-list</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="twitterList">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>name</th>
+                                    <th>head</th>
+                                    <th>weight</th>
+                                    <th>msg</th>
+                                    <th>time</th>
+                                    <th>img</th>
+                                    <th>action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--                 <tr>
+                                <td>1,001</td>
+                                <td>Lorem</td>
+                                <td>ipsum</td>
+                                <td>dolor</td>
+                                <td>sit</td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mainBox" id="ins-main" style="display: none">
+                    <h1 class="page-header">INS</h1>
+                    <div class="container">
+                        <div class="form">
+                            <div class="form-group">
+                                <label for="">name:</label>
+                                <input type="text" class="form-control" id="ins-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="">weight:</label>
+                                <input type="text" class="form-control" id="ins-weight">
+                            </div>
+                            <div class="form-group">
+                                <label for="">img:</label>
+                                <input type="text" class="form-control" id="ins-img">
+                            </div>
+                            <div class="form-group">
+                                <label for="">msg:</label>
+                                <textarea class="form-control" rows="3" id="ins-msg"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="btn btn-default" id="ins-submit">提交</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="sub-header">ins-list</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="insList">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>name</th>
+                                    <th>weight</th>
+                                    <th>msg</th>
+                                    <th>img</th>
+                                    <th>action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--<tr>
+                                <td>1,001</td>
+                                <td>Lorem</td>
+                                <td>ipsum</td>
+                                <td>dolor</td>
+                                <td>sit</td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mainBox" id="line-main" style="display: none">
+                    <h1 class="page-header">添加线路</h1>
+                    <div class="container">
+                        <div class="form">
+                            <div class="form-group">
+                                <select id="line-date">
+                                    <option value="date">今天</option>
+                                    <option value="afterDate">明天</option>
+                                </select>
+                                <select id="line-type">
+                                    <option value="source">直播源</option>
+                                    <option value="iframe">iframe</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">对阵:</label>
+                                <input type="text" class="form-control" id="line-title">
+                                <select id="line-title2" >
+                                    <option value="" name="title">无</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">线路名称:</label>
+                                <input type="text" class="form-control" id="line-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="">weight:</label>
+                                <input type="text" class="form-control" id="line-weight">
+                            </div>
+                            <div class="form-group">
+                                <label for="">url:</label>
+                                <textarea class="form-control" rows="3" id="line-url"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="btn btn-default" id="line-submit">提交</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="sub-header">添加线路列表</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="lineList">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>日期</th>
+                                    <th>对阵</th>
+                                    <th>线路名</th>
+                                    <th>资源类型</th>
+                                    <th>weight</th>
+                                    <th>url</th>
+                                    <th>action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--<tr>
+                                <td>1,001</td>
+                                <td>Lorem</td>
+                                <td>ipsum</td>
+                                <td>dolor</td>
+                                <td>sit</td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/wilddog.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
+>>>>>>> 9a3e58fd60dc5cfd27927206555a00d3f06f8e43
